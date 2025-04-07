@@ -1,4 +1,4 @@
-# Angular Project
+# WorkDayCalculatorUI
 
 ## How to Run the Project Locally
 
