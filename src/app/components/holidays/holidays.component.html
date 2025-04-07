@@ -1,0 +1,30 @@
+<h2 class="p-text-center p-mb-4" style="font-size: 24px; color: #007bff;">Holidays</h2>
+<p-table [value]="holidays.holidays" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <!-- <th>Id</th> -->
+            <th>Name</th>
+            <th>Month</th>
+            <th>Day</th>
+            <th>Year</th>
+            <th>Recurring</th>
+            <th>Active</th>
+            <th>Actions</th> 
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-holiday>
+        <tr>
+            <!-- <td>{{ holiday.id }}</td> -->
+            <td>{{ holiday.name }}</td>
+            <td>{{ getMonthName(holiday.month) }}</td>
+            <td>{{ holiday.day }}</td>
+            <td>{{ holiday.year ?? 'N/A' }}</td>
+            <td>{{ holiday.isRecurring ? 'Yes' : 'No' }}</td>
+            <td>{{ holiday.isActive ? 'Yes' : 'No' }}</td>
+            <td>
+                <!-- Delete button -->
+                <button pButton icon="pi pi-times" label="Delete" (click)="deleteHoliday(holiday.id)" class="p-button-danger p-button-sm"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

@@ -1,0 +1,13 @@
+/* Custom CSS to make sure the columns are side by side */
+.p-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Create two equal columns */
+    gap: 20px; /* Adds some space between the columns */
+  }
+  
+  .p-col {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  

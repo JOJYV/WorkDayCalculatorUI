@@ -1,0 +1,67 @@
+<h2 class="p-text-center p-mb-4" style="font-size: 24px; color: #007bff;">Add Holiday</h2>
+<form [formGroup]="holidayForm" (ngSubmit)="onSubmit()">
+  <div class="p-fluid">
+
+    <!-- Holiday Name -->
+    <div class="p-field">
+      <label for="name">Holiday Name</label>
+      <input id="name" type="text" pInputText formControlName="name" />
+      <div *ngIf="f['name'].touched && f['name'].invalid" class="p-error">
+        <small *ngIf="f['name'].errors?.['required']">Holiday name is required.</small>
+        <small *ngIf="f['name'].errors?.['maxlength']">Holiday name can't exceed 255 characters.</small>
+      </div>
+    </div>
+
+    <!-- Month -->
+    <div class="p-field">
+      <label for="month">Month</label>
+      <input id="month" type="number" pInputText formControlName="month" />
+      <div *ngIf="f['month'].touched && f['month'].invalid" class="p-error">
+        <small *ngIf="f['month'].errors?.['required']">Month is required.</small>
+        <small *ngIf="f['month'].errors?.['min'] || f['month'].errors?.['max']">Month must be between 1 and 12.</small>
+      </div>
+    </div>
+
+    <!-- Day -->
+    <div class="p-field">
+      <label for="day">Day</label>
+      <input id="day" type="number" pInputText formControlName="day" />
+      <div *ngIf="f['day'].touched && f['day'].invalid" class="p-error">
+        <small *ngIf="f['day'].errors?.['required']">Day is required.</small>
+        <small *ngIf="f['day'].errors?.['min'] || f['day'].errors?.['max']">Day must be between 1 and 31.</small>
+      </div>
+    </div>
+
+    <!-- Year (conditionally required) -->
+    <div class="p-field">
+      <label for="year">Year <span *ngIf="!f['isRecurring'].value">(required)</span></label>
+      <input id="year" type="number" pInputText formControlName="year" />
+      <div *ngIf="f['year'].touched && f['year'].invalid" class="p-error">
+        <small *ngIf="f['year'].errors?.['required'] && !f['isRecurring'].value">Year is required for non-recurring holidays.</small>
+        <small *ngIf="f['year'].errors?.['min'] || f['year'].errors?.['max']">Year must be a valid number between 1 and 9999.</small>
+      </div>
+    </div>
+
+    <!-- Is Recurring -->
+    <div class="p-field-checkbox">
+      <p-checkbox formControlName="isRecurring" [binary]="true" inputId="isRecurring"></p-checkbox>
+      <label for="isRecurring">Is Recurring</label>
+      <div *ngIf="f['isRecurring'].touched && f['isRecurring'].invalid" class="p-error">
+        <small *ngIf="f['isRecurring'].errors?.['required']">IsRecurring is required.</small>
+      </div>
+    </div>
+
+    <!-- Is Active -->
+    <div class="p-field-checkbox">
+      <p-checkbox formControlName="isActive" [binary]="true" inputId="isActive"></p-checkbox>
+      <label for="isActive">Is Active</label>
+      <div *ngIf="f['isActive'].touched && f['isActive'].invalid" class="p-error">
+        <small *ngIf="f['isActive'].errors?.['required']">IsActive is required.</small>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" pButton label="Save Holiday" [disabled]="holidayForm.invalid"></button>
+
+  </div>
+</form>

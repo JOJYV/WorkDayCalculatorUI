@@ -1,0 +1,82 @@
+<div class="p-grid p-align-start p-justify-between">
+  <!-- Workday Calculator Component (Left Side) -->
+  <div class="p-col-12 p-md-6" style="padding: 20px;">
+    <h2 class="p-text-center p-mb-4" style="font-size: 24px; color: #007bff;">Workday Calculator</h2>
+
+    <form [formGroup]="workdayForm" (ngSubmit)="calculateWorkday()">
+      <!-- Work Start Date -->
+      <div class="p-field p-mb-4">
+        <label for="startDate" class="p-text-sm" style="margin-bottom: 10px;">Work Start Date</label>
+        <p-calendar
+          inputId="startDate"
+          formControlName="startDate"
+          [showTime]="true"
+          [hourFormat]="'24'"
+          dateFormat="dd-mm-yy"
+          inputStyleClass="p-inputtext-sm"
+          [ngStyle]="{ 'width': '100%' }"
+        ></p-calendar>
+      </div>
+
+      <!-- Working Days -->
+      <div class="p-field p-mb-4">
+        <label for="workingDays" class="p-text-sm" style="margin-bottom: 10px;">Working Days To Add/Subtract</label>
+        <input
+          id="workingDays"
+          type="number"
+          formControlName="workingDays"
+          pInputText
+          class="p-inputtext-sm"
+          [ngStyle]="{ 'width': '100%' }"
+        />
+      </div>
+
+      <!-- Work Start Hour -->
+      <div class="p-field p-mb-4">
+        <label for="workStartHour" class="p-text-sm" style="margin-bottom: 10px;">Daily Work Start Hour (HH:mm)</label>
+        <input
+          id="workStartHour"
+          type="text"
+          formControlName="workStartHour"
+          pInputText
+          class="p-inputtext-sm"
+          [ngStyle]="{ 'width': '100%' }"
+        />
+      </div>
+
+      <!-- Work End Hour -->
+      <div class="p-field p-mb-4">
+        <label for="workEndHour" class="p-text-sm" style="margin-bottom: 10px;">Daily Work End Hour (HH:mm)</label>
+        <input
+          id="workEndHour"
+          type="text"
+          formControlName="workEndHour"
+          pInputText
+          class="p-inputtext-sm"
+          [ngStyle]="{ 'width': '100%' }"
+        />
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        pButton
+        label="Calculate"
+        [disabled]="workdayForm.invalid"
+        class="p-button-sm p-mt-3"
+        style="background-color: #007bff; color: white; border-radius: 5px; padding: 12px 20px; border: none; cursor: pointer; transition: background-color 0.3s;"
+      ></button>
+    </form>
+
+    <!-- Result Section -->
+    <div *ngIf="resultDate" class="p-mt-4">
+      <h4 class="p-text-center" style="padding-top: 15px;">Result: {{ resultDate | date: 'dd-MM-yyyy HH:mm' }}</h4>
+    </div>
+    <app-create-holiday (holidayCreated)="onHolidayCreated()"></app-create-holiday> <!-- Last Component -->
+  </div>
+
+  <!-- Holidays Component (Right Side) -->
+  <div class="p-grid" class="p-col-12 p-md-6" style="padding: 20px;">
+    <app-holidays></app-holidays>    
+  </div>
+</div>

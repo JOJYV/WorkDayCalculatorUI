@@ -1,10 +1,23 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { WorkdayCalculatorComponent } from './components/workday-calculator/workday-calculator.component';
 
-const routes: Routes = [];
+
+const routes: Routes = [ 
+ 
+  { path: 'workdaycalculate', component: WorkdayCalculatorComponent },
+  
+
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
+
+
